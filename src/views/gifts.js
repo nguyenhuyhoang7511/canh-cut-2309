@@ -60,13 +60,12 @@ export function renderGifts({ gifts, openedGiftIds, openingGiftId, selectedGiftI
   const hint = selectedGiftId
     ? ''
     : allOpened
-      ? '<p class="gift-hint is-ready mt-6">Mở hết rồi đó! Giờ chọn lấy 1 túi em ưng nhất đi 💙</p>'
+      ? '<p class="gift-hint is-ready mt-6">Mở hết rồi đó! Giờ chọn lấy 1 túi em thích đi 💙</p>'
       : `<p class="gift-hint mt-6">Đã mở ${openedGiftIds.length}/${gifts.length} túi quà</p>`
 
   return `
     <section class="mx-auto flex min-h-[100dvh] max-w-3xl flex-col justify-center px-5 py-10 sm:px-6 sm:py-12">
       <button class="gifts-back-btn" type="button" data-action="back">← Quay lại</button>
-      <p class="mt-4 text-xs font-bold tracking-[0.3em] text-brand uppercase">Bước cuối</p>
       <h2 class="mt-2 text-2xl font-bold sm:text-3xl">Chọn quà của em</h2>
       <p class="mt-2 text-sm text-ink/70 sm:text-base">
         Mở hết cả 6 túi xem bên trong có gì, rồi chọn lấy 1 túi ưng nhất nhé.
