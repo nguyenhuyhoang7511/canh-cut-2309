@@ -19,7 +19,7 @@ export const gifts = [
   },
   {
     id: 'cash',
-    name: '5 tờ 500k',
+    name: '5 tờ 5l',
     emoji: '💵',
     description: 'Quà tặng tiền mặt trị giá 2,5 triệu đồng.',
   },
