@@ -65,7 +65,8 @@ export function renderGifts({ gifts, openedGiftIds, openingGiftId, selectedGiftI
 
   return `
     <section class="mx-auto flex min-h-[100dvh] max-w-3xl flex-col justify-center px-5 py-10 sm:px-6 sm:py-12">
-      <p class="text-xs font-bold tracking-[0.3em] text-brand uppercase">Bước cuối</p>
+      <button class="gifts-back-btn" type="button" data-action="back">← Quay lại</button>
+      <p class="mt-4 text-xs font-bold tracking-[0.3em] text-brand uppercase">Bước cuối</p>
       <h2 class="mt-2 text-2xl font-bold sm:text-3xl">Chọn quà của em</h2>
       <p class="mt-2 text-sm text-ink/70 sm:text-base">
         Mở hết cả 6 túi xem bên trong có gì, rồi chọn lấy 1 túi ưng nhất nhé.

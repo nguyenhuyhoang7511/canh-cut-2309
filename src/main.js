@@ -7,7 +7,7 @@ import { renderMemories } from './views/memories.js'
 import { renderGate } from './views/gate.js'
 import { renderGifts } from './views/gifts.js'
 import { renderResult } from './views/result.js'
-import { loadGiftChoice, saveGiftChoice, clearGiftChoice } from './lib/storage.js'
+import { loadGiftChoice, saveGiftChoice, clearGiftChoice, loadOpenedGifts, saveOpenedGifts, clearOpenedGifts } from './lib/storage.js'
 import { readStateFromUrl, pushUrlState, replaceUrlState } from './lib/router.js'
 
 const slides = buildSlides()
@@ -24,11 +24,17 @@ const initialSelectedGiftId = giftIds.includes(savedGiftId) ? savedGiftId : null
 const urlState = readStateFromUrl()
 const initialStep = urlState.step === 'result' && !initialSelectedGiftId ? 'gifts' : urlState.step
 
+const savedOpenedGifts = loadOpenedGifts().filter((id) => giftIds.includes(id))
+const mergedOpenedGiftIds = [...new Set([
+  ...urlState.openedGiftIds.filter((id) => giftIds.includes(id)),
+  ...savedOpenedGifts,
+])]
+
 const state = {
   step: initialStep,
   slideIndex: clampSlideIndex(urlState.slideIndex),
   slideDirection: 'forward',
-  openedGiftIds: urlState.openedGiftIds.filter((id) => giftIds.includes(id)),
+  openedGiftIds: mergedOpenedGiftIds,
   openingGiftId: null,
   selectedGiftId: initialSelectedGiftId,
   dateError: false,
@@ -149,6 +155,15 @@ function goBack() {
     state.slideIndex -= 1
     render()
     syncUrl()
+    return
+  }
+
+  if (state.step === 'gifts') {
+    state.step = 'memories'
+    state.slideIndex = slides.length - 1
+    state.slideDirection = 'back'
+    render()
+    syncUrl()
   }
 }
 
@@ -174,9 +189,9 @@ function setupOtpHandlers() {
 }
 
 function verifyDate(value) {
-  // value is ddmmyyyy, config stores yyyy-mm-dd
+  // value is ddmmyy (6 digits), config stores yyyy-mm-dd
   const [year, month, day] = siteConfig.anniversaryDate.split('-')
-  const expected = day + month + year
+  const expected = day + month + year.slice(2)
 
   state.dateValue = value
 
@@ -210,6 +225,7 @@ function openGift(giftId) {
   window.setTimeout(() => {
     state.openedGiftIds.push(giftId)
     state.openingGiftId = null
+    saveOpenedGifts(state.openedGiftIds)
     render()
     syncUrl()
 

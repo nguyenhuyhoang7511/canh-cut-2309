@@ -1,4 +1,32 @@
 const STORAGE_KEY = 'ghl-birthday-gift-choice'
+const OPENED_KEY = 'ghl-birthday-opened-gifts'
+
+export function loadOpenedGifts() {
+  try {
+    const raw = window.localStorage.getItem(OPENED_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
+
+export function saveOpenedGifts(openedGiftIds) {
+  try {
+    window.localStorage.setItem(OPENED_KEY, JSON.stringify(openedGiftIds))
+  } catch {
+    // localStorage unavailable — skip persistence
+  }
+}
+
+export function clearOpenedGifts() {
+  try {
+    window.localStorage.removeItem(OPENED_KEY)
+  } catch {
+    // localStorage unavailable — skip persistence
+  }
+}
 
 export function loadGiftChoice() {
   try {

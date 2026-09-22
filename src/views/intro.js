@@ -8,14 +8,11 @@ export function renderIntro() {
 
   return `
     <div class="intro-page">
-      <!-- Emoji floral corner -->
-      <div class="intro-floral" aria-hidden="true">
-        <span class="fe fe-rose">🌹</span>
-        <span class="fe fe-leaf1">🌿</span>
-        <span class="fe fe-blossom">🌸</span>
-        <span class="fe fe-leaf2">🍃</span>
-        <span class="fe fe-blue">💙</span>
-      </div>
+      <!-- Decorative stickers -->
+      <img class="deco deco-tr" src="https://marketplace.canva.com/jbg58/MAGXwUjbg58/1/tl/canva-MAGXwUjbg58.png" alt="" aria-hidden="true" />
+      <img class="deco deco-bl" src="https://marketplace.canva.com/BwhH8/MAFO-rBwhH8/1/tl/canva-MAFO-rBwhH8.png" alt="" aria-hidden="true" />
+      <img class="deco deco-br" src="https://marketplace.canva.com/tu3Ec/MAGF6htu3Ec/1/tl/canva-MAGF6htu3Ec.png" alt="" aria-hidden="true" />
+      <img class="deco deco-mid" src="https://marketplace.canva.com/8mie0/MAFllg8mie0/1/tl/canva-MAFllg8mie0.png" alt="" aria-hidden="true" />
 
       <!-- Main card -->
       <article class="intro-card animate-fade-up">
@@ -33,7 +30,7 @@ export function renderIntro() {
 
           <div class="intro-birthyear">
             <span class="intro-byline"></span>
-            <span class="intro-byyear">Sinh năm ${siteConfig.birthYear}</span>
+            <span class="intro-byyear">23/09/ ${siteConfig.birthYear}</span>
             <span class="intro-byline"></span>
           </div>
 
